@@ -96,6 +96,25 @@ span.psw {
     cursor: pointer;
     visibility: visible !important;
 }
+
+.btn{
+    width: 200px;
+    height: 50px;
+}
+
+.btn-fir {
+    background: red;
+    border: red;
+}
+.btn-fir:hover {
+    background: red;
+    border: red;
+}
+.error {
+    color: red;
+    padding: 5px;
+    font-size: 14px;
+}
 /*
     .collapsed{
        .arrow:before{
