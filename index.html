@@ -29,7 +29,7 @@
                     <li>
                         <a  ng-click="showServices()"><i class="fa fa-calendar fa-lg fa-fw sidebar-icon"></i> Services</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -60,7 +60,6 @@
             </div>
         </form>
         <div class = services ng-if="!showDashboard" >
-            Place service
             <ul class="nav nav-tabs">
                 <li ng-repeat= "sn in servicesName track by $index" ng-click ="showTabContent(sn)">
                     <a data-toggle="tab" href= "{{'#' + sn}}" >{{sn}}</a>
@@ -70,7 +69,7 @@
             <div class="tab-content">
                 <div id = {{activeTab}} class="tab-pane fade in active">
                     <h1>Your data is accessed by</h1>
-                    <table class="table table-striped">
+                    <table class="table table-striped" ng-if = "!serviceError">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -84,11 +83,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button type="button" ng-click="modalAction('Authority')" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Authority</button>
-                    <button type="button" ng-click="modalAction('FIR')" class="btn btn-info btn-lg btn-fir" data-toggle="modal" data-target="#myModal">File FIR</button>
-
+                    <div ng-if = "!serviceError">
+                        <button type="button" ng-click="modalAction('Authority')" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Authority</button>
+                        <button type="button" ng-click="modalAction('FIR')" class="btn btn-info btn-lg btn-fir" data-toggle="modal" data-target="#myModal">File FIR</button>
+                    </div>
+                    <div class="error" ng-if = "serviceError">
+                        Service details can not be fetched right now. Please try again later.
+                    </div>
                     <!-- Modal -->
-                    <div id="myModal" class="modal fade" role="dialog">
+                    <div id="myModal" class="modal fade" role="dialog" ng-if = "!serviceError">
                         <div class="modal-dialog">
 
                             <!-- Modal content-->

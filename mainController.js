@@ -43,12 +43,17 @@ angular.module('myApp', []).controller('mainCtrl', function($scope, $http) {
         var cookie = getTokenCookie()
         $http.get(url,{
             'withCredentials': true
+            // 'headers': {
+            //     'Cookie': cookie
+            // }
         })
             .then(function(result) {
-                //$scope.data = result.response[0];
-                //return result;
                 callback(result.data);
-        });
+                $scope.serviceError = false;
+            }, function(error) {
+                $scope.serviceError = true;
+                console.log("not an authorised user")
+            });
 
     }
 
@@ -83,6 +88,7 @@ angular.module('myApp', []).controller('mainCtrl', function($scope, $http) {
                     $scope.loginInfoError = '';
                     $scope.showDashboard = false;
                     document.cookie = 'T' + '=' + result.data.response.token + '; domain=.prepchalk.com; path=/';
+                    $scope.showServices();
                 },
                 function(error){
                     $scope.loginInfoError = 'Login Credentials are not authenticated.'
